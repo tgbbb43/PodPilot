@@ -120,3 +120,4 @@ For Minikube, either point your shell's Docker CLI at Minikube's daemon first (`
 | frontend | `USERS_SERVICE_URL`, `TASKS_SERVICE_URL`, `NOTIFICATIONS_SERVICE_URL` (used to render the nginx config at container start) |
 
 When you write the Kubernetes manifests, these map directly to ConfigMap/Secret-backed env vars, with `MONGO_URI`/`*_SERVICE_URL` pointing at in-cluster Service DNS names (e.g. `http://tasks-service.default.svc.cluster.local:4002` or just `http://tasks-service:4002` within the same namespace).
+# PodPilot
