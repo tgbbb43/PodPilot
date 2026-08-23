@@ -6,19 +6,23 @@ mongodb:
   storage: 1Gi
 
 usersService:
-  image: podpilot-users-service:latest
+  image: eli9476/podpilot-users-service
+  tag: latest
   port: 4001
   jwtSecret: local-dev-secret
 
 tasksService:
-  image: podpilot-tasks-service:latest
+  image: eli9476/podpilot-tasks-service
+  tag: latest
   port: 4002
   jwtSecret: local-dev-secret
 
 notificationsService:
-  image: podpilot-notifications-service:latest
+  image: eli9476/podpilot-notifications-service
+  tag: latest
   port: 4003
 
 frontend:
-  image: podpilot-frontend:latest
+  image: eli9476/podpilot-frontend
+  tag: latest
   port: 80

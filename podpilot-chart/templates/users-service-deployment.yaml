@@ -15,8 +15,8 @@ spec:
     spec:
       containers:
         - name: users-service
-          image: {{ .Values.usersService.image }}
-          imagePullPolicy: Never
+          image: "{{ .Values.usersService.image }}:{{ .Values.usersService.tag }}"
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: {{ .Values.usersService.port }}
           env:
