@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb              # השם הזה חייב להישאר "mongodb" - כדי ש-MONGO_URI הקיים ימשיך לעבוד בלי שינוי!
+  namespace: podpilot
+spec:
+  type: ClusterIP
+  selector:
+    app: mongodb             # תואם ל-label של ה-Deployment
+  ports:
+    - port: 27017
+      targetPort: 27017

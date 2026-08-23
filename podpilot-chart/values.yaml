@@ -1,0 +1,24 @@
+namespace: podpilot
+
+mongodb:
+  image: mongo:7
+  port: 27017
+  storage: 1Gi
+
+usersService:
+  image: podpilot-users-service:latest
+  port: 4001
+  jwtSecret: local-dev-secret
+
+tasksService:
+  image: podpilot-tasks-service:latest
+  port: 4002
+  jwtSecret: local-dev-secret
+
+notificationsService:
+  image: podpilot-notifications-service:latest
+  port: 4003
+
+frontend:
+  image: podpilot-frontend:latest
+  port: 80

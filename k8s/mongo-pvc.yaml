@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-pvc
+  namespace: podpilot
+spec:
+  accessModes:
+    - ReadWriteOnce      # פוד אחד יכול לכתוב בו-זמנית - מספיק למונגו יחיד
+  resources:
+    requests:
+      storage: 1Gi       # כמה מקום? (1Gi מספיק לפיתוח)

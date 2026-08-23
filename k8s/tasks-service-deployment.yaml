@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tasks-service
+  namespace: podpilot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tasks-service
+  template:
+    metadata:
+      labels:
+        app: tasks-service
+    spec:
+      containers:
+        - name: tasks-service
+          image: podpilot-tasks-service:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 4002
+          env:
+            - name: PORT
+              value: "4002"
+            - name: MONGO_URI
+              value: "mongodb://mongodb:27017/tasks"
+            - name: JWT_SECRET
+              value: "local-dev-secret"
+            - name: USERS_SERVICE_URL
+              value: "http://users-service:4001"
+            - name: NOTIFICATIONS_SERVICE_URL
+              value: "http://notifications-service:4003"

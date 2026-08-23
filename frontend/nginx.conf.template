@@ -1,0 +1,44 @@
+server {
+    listen 80;
+    server_name _;
+    root /usr/share/nginx/html;
+    index index.html;
+
+    # /api/auth/register, /api/auth/login -> users-service root routes
+    location /api/auth/ {
+        rewrite ^/api/auth/(.*)$ /$1 break;
+        proxy_pass ${USERS_SERVICE_URL};
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    # /api/users/:id -> users-service GET /users/:id
+    location /api/users/ {
+        rewrite ^/api/users/(.*)$ /users/$1 break;
+        proxy_pass ${USERS_SERVICE_URL};
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    # /api/tasks... -> tasks-service /tasks...
+    location /api/tasks {
+        rewrite ^/api/tasks(.*)$ /tasks$1 break;
+        proxy_pass ${TASKS_SERVICE_URL};
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header Authorization $http_authorization;
+    }
+
+    # /api/notifications/:userId -> notifications-service /notifications/:userId
+    location /api/notifications {
+        rewrite ^/api/notifications(.*)$ /notifications$1 break;
+        proxy_pass ${NOTIFICATIONS_SERVICE_URL};
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    # SPA fallback
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: users-service
+  namespace: podpilot
+spec:
+  type: ClusterIP
+  selector:
+    app: users-service
+  ports:
+    - port: 4001
+      targetPort: 4001

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tasks-service
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tasks-service
+  template:
+    metadata:
+      labels:
+        app: tasks-service
+    spec:
+      containers:
+        - name: tasks-service
+          image: {{ .Values.tasksService.image }}
+          imagePullPolicy: Never
+          ports:
+            - containerPort: {{ .Values.tasksService.port }}
+          env:
+            - name: PORT
+              value: "{{ .Values.tasksService.port }}"
+            - name: MONGO_URI
+              value: "mongodb://mongodb:{{ .Values.mongodb.port }}/tasks"
+            - name: JWT_SECRET
+              value: "{{ .Values.tasksService.jwtSecret }}"
+            - name: USERS_SERVICE_URL
+              value: "http://users-service:{{ .Values.usersService.port }}"
+            - name: NOTIFICATIONS_SERVICE_URL
+              value: "http://notifications-service:{{ .Values.notificationsService.port }}"

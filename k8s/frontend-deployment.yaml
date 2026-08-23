@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: podpilot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: podpilot-frontend:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+          env:
+            - name: USERS_SERVICE_URL
+              value: "http://users-service:4001"
+            - name: TASKS_SERVICE_URL
+              value: "http://tasks-service:4002"
+            - name: NOTIFICATIONS_SERVICE_URL
+              value: "http://notifications-service:4003"

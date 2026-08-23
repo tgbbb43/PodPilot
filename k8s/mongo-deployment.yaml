@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+  namespace: podpilot
+spec:
+  replicas: 1              # חשוב! עם PVC מסוג ReadWriteOnce, אסור יותר מ-1 replica
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo:7          # אותה גרסה כמו ב-docker-compose שלך
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: mongo-storage
+              mountPath: /data/db     # זה הנתיב הפנימי שמונגו כותב אליו את הנתונים
+      volumes:
+        - name: mongo-storage
+          persistentVolumeClaim:
+            claimName: mongo-pvc          # שם ה-PVC שיצרת למעלה

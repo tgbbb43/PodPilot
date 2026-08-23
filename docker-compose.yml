@@ -1,0 +1,64 @@
+services:
+  mongodb:
+    image: mongo:7
+    container_name: kubekanban-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  users-service:
+    build: ./users-service
+    container_name: kubekanban-users-service
+    environment:
+      PORT: 4001
+      MONGO_URI: mongodb://mongodb:27017/users
+      JWT_SECRET: local-dev-secret
+    ports:
+      - "4001:4001"
+    depends_on:
+      - mongodb
+
+  tasks-service:
+    build: ./tasks-service
+    container_name: kubekanban-tasks-service
+    environment:
+      PORT: 4002
+      MONGO_URI: mongodb://mongodb:27017/tasks
+      JWT_SECRET: local-dev-secret
+      USERS_SERVICE_URL: http://users-service:4001
+      NOTIFICATIONS_SERVICE_URL: http://notifications-service:4003
+    ports:
+      - "4002:4002"
+    depends_on:
+      - mongodb
+      - users-service
+      - notifications-service
+
+  notifications-service:
+    build: ./notifications-service
+    container_name: kubekanban-notifications-service
+    environment:
+      PORT: 4003
+      MONGO_URI: mongodb://mongodb:27017/notifications
+    ports:
+      - "4003:4003"
+    depends_on:
+      - mongodb
+
+  frontend:
+    build: ./frontend
+    container_name: kubekanban-frontend
+    environment:
+      USERS_SERVICE_URL: http://users-service:4001
+      TASKS_SERVICE_URL: http://tasks-service:4002
+      NOTIFICATIONS_SERVICE_URL: http://notifications-service:4003
+    ports:
+      - "8080:80"
+    depends_on:
+      - users-service
+      - tasks-service
+      - notifications-service
+
+volumes:
+  mongo-data:

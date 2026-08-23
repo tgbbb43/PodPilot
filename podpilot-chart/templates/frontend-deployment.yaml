@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: {{ .Values.frontend.image }}
+          imagePullPolicy: Never
+          ports:
+            - containerPort: {{ .Values.frontend.port }}
+          env:
+            - name: USERS_SERVICE_URL
+              value: "http://users-service:{{ .Values.usersService.port }}"
+            - name: TASKS_SERVICE_URL
+              value: "http://tasks-service:{{ .Values.tasksService.port }}"
+            - name: NOTIFICATIONS_SERVICE_URL
+              value: "http://notifications-service:{{ .Values.notificationsService.port }}"

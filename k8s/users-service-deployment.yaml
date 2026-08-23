@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-service
+  namespace: podpilot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: users-service
+  template:
+    metadata:
+      labels:
+        app: users-service
+    spec:
+      containers:
+        - name: users-service
+          image: podpilot-users-service:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 4001
+          env:
+            - name: PORT
+              value: "4001"
+            - name: MONGO_URI
+              value: "mongodb://mongodb:27017/users"
+            - name: JWT_SECRET
+              value: "local-dev-secret"
