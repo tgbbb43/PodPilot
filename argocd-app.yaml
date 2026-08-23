@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: podpilot
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/tgbbb43/PodPilot.git
+    targetRevision: main
+    path: podpilot-chart
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: podpilot
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
