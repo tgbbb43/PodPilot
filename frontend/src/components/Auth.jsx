@@ -27,7 +27,7 @@ export default function Auth({ onAuthenticated }) {
   return (
     <div className="auth-screen">
       <form className="auth-form" onSubmit={handleSubmit}>
-        <h1>KubeKanban</h1>
+        <h1>PodPilot 🚀</h1>
         <p className="auth-subtitle">{mode === 'login' ? 'Sign in' : 'Create an account'}</p>
 
         <label>
