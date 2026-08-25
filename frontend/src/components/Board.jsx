@@ -78,7 +78,7 @@ export default function Board({ currentUser }) {
           value={assignedTo}
           onChange={(e) => setAssignedTo(e.target.value)}
         />
-        <button type="submit">Add task</button>
+        <button type="submit">➕ Add Task</button>
       </form>
 
       {error && <p className="auth-error">{error}</p>}
