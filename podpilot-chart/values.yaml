@@ -24,5 +24,5 @@ notificationsService:
 
 frontend:
   image: eli9476/podpilot-frontend
-  tag: a5dac360487e0c32d99715005f80cf226f13ef16
+  tag: 2ca8a4df15b3d6471d30cd879573828bc07b3138
   port: 80
