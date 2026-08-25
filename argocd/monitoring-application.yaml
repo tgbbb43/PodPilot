@@ -10,6 +10,7 @@ spec:
       chart: kube-prometheus-stack
       targetRevision: "65.5.1"
       helm:
+        skipCrds: true
         valueFiles:
           - $values/monitoring/values.yaml
     - repoURL: https://github.com/tgbbb43/PodPilot
