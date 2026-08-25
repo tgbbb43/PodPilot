@@ -19,7 +19,7 @@ export default function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>KubeKanban</h1>
+        <h1>PodPilot</h1>
         <div className="app-header__right">
           <NotificationsBadge userId={session.user.id} />
           <span className="app-header__user">{session.user.username}</span>
