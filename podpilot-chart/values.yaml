@@ -1,28 +1,58 @@
 namespace: podpilot
-
 mongodb:
   image: mongo:7
   port: 27017
   storage: 1Gi
-
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
 usersService:
   image: eli9476/podpilot-users-service
   tag: c9ca7231da2ef3b933d2da4167a411dd490137a6
   port: 4001
   jwtSecret: local-dev-secret
-
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 250m
+      memory: 128Mi
 tasksService:
   image: eli9476/podpilot-tasks-service
   tag: c9ca7231da2ef3b933d2da4167a411dd490137a6
   port: 4002
   jwtSecret: local-dev-secret
-
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 250m
+      memory: 128Mi
 notificationsService:
   image: eli9476/podpilot-notifications-service
   tag: c9ca7231da2ef3b933d2da4167a411dd490137a6
   port: 4003
-
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 250m
+      memory: 128Mi
 frontend:
   image: eli9476/podpilot-frontend
   tag: c9ca7231da2ef3b933d2da4167a411dd490137a6
   port: 80
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi
