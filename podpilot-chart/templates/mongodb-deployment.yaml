@@ -16,6 +16,8 @@ spec:
       containers:
         - name: mongodb
           image: {{ .Values.mongodb.image }}
+          resources:
+            {{- toYaml .Values.mongodb.resources | nindent 12 }}
           ports:
             - containerPort: {{ .Values.mongodb.port }}
           volumeMounts:

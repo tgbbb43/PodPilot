@@ -17,6 +17,8 @@ spec:
         - name: tasks-service
           image: "{{ .Values.tasksService.image }}:{{ .Values.tasksService.tag }}"
           imagePullPolicy: IfNotPresent
+          resources:
+            {{- toYaml .Values.tasksService.resources | nindent 12 }}
           ports:
             - containerPort: {{ .Values.tasksService.port }}
           env:

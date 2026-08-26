@@ -17,6 +17,8 @@ spec:
         - name: users-service
           image: "{{ .Values.usersService.image }}:{{ .Values.usersService.tag }}"
           imagePullPolicy: IfNotPresent
+          resources:
+            {{- toYaml .Values.usersService.resources | nindent 12 }}
           ports:
             - containerPort: {{ .Values.usersService.port }}
           env:

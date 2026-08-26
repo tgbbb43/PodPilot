@@ -17,6 +17,8 @@ spec:
         - name: frontend
           image: "{{ .Values.frontend.image }}:{{ .Values.frontend.tag }}"
           imagePullPolicy: IfNotPresent
+          resources:
+            {{- toYaml .Values.frontend.resources | nindent 12 }}
           ports:
             - containerPort: {{ .Values.frontend.port }}
           env:

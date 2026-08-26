@@ -17,6 +17,8 @@ spec:
         - name: notifications-service
           image: "{{ .Values.notificationsService.image }}:{{ .Values.notificationsService.tag }}"
           imagePullPolicy: IfNotPresent
+          resources:
+            {{- toYaml .Values.notificationsService.resources | nindent 12 }}
           ports:
             - containerPort: {{ .Values.notificationsService.port }}
           env:
