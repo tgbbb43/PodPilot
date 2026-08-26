@@ -7,22 +7,22 @@ mongodb:
 
 usersService:
   image: eli9476/podpilot-users-service
-  tag: bc4a5f8693cd7400bd1222aaf4ffe6330d06440d
+  tag: c9ca7231da2ef3b933d2da4167a411dd490137a6
   port: 4001
   jwtSecret: local-dev-secret
 
 tasksService:
   image: eli9476/podpilot-tasks-service
-  tag: bc4a5f8693cd7400bd1222aaf4ffe6330d06440d
+  tag: c9ca7231da2ef3b933d2da4167a411dd490137a6
   port: 4002
   jwtSecret: local-dev-secret
 
 notificationsService:
   image: eli9476/podpilot-notifications-service
-  tag: bc4a5f8693cd7400bd1222aaf4ffe6330d06440d
+  tag: c9ca7231da2ef3b933d2da4167a411dd490137a6
   port: 4003
 
 frontend:
   image: eli9476/podpilot-frontend
-  tag: bc4a5f8693cd7400bd1222aaf4ffe6330d06440d
+  tag: c9ca7231da2ef3b933d2da4167a411dd490137a6
   port: 80
