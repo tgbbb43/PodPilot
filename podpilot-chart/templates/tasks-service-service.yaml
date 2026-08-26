@@ -3,10 +3,13 @@ kind: Service
 metadata:
   name: tasks-service
   namespace: {{ .Values.namespace }}
+  labels:
+    app: tasks-service
 spec:
   type: ClusterIP
   selector:
     app: tasks-service
   ports:
-    - port: {{ .Values.tasksService.port }}
+    - name: http
+      port: {{ .Values.tasksService.port }}
       targetPort: {{ .Values.tasksService.port }}
