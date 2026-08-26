@@ -12,7 +12,7 @@ mongodb:
       memory: 512Mi
 usersService:
   image: eli9476/podpilot-users-service
-  tag: cd02a42b1839ab8ca92eea9ec85aba14d1ffb302
+  tag: b39c6961bc3f9466524eccc9f0d7ce2695568664
   port: 4001
   jwtSecret: local-dev-secret
   resources:
@@ -24,7 +24,7 @@ usersService:
       memory: 128Mi
 tasksService:
   image: eli9476/podpilot-tasks-service
-  tag: cd02a42b1839ab8ca92eea9ec85aba14d1ffb302
+  tag: b39c6961bc3f9466524eccc9f0d7ce2695568664
   port: 4002
   jwtSecret: local-dev-secret
   resources:
@@ -36,7 +36,7 @@ tasksService:
       memory: 128Mi
 notificationsService:
   image: eli9476/podpilot-notifications-service
-  tag: cd02a42b1839ab8ca92eea9ec85aba14d1ffb302
+  tag: b39c6961bc3f9466524eccc9f0d7ce2695568664
   port: 4003
   resources:
     requests:
@@ -47,7 +47,7 @@ notificationsService:
       memory: 128Mi
 frontend:
   image: eli9476/podpilot-frontend
-  tag: cd02a42b1839ab8ca92eea9ec85aba14d1ffb302
+  tag: b39c6961bc3f9466524eccc9f0d7ce2695568664
   port: 80
   resources:
     requests:
